@@ -70,9 +70,13 @@ def start():
 # prompt for pool of followed accounts (aka 'friends')
 def prompt_pool():
     print('Please enter a Twitter Handle (ex: user_handle1) to play:')
-    user = raw_input()
+    user = raw_input().replace(" ", "")
     if (user == ''): user = 'cse5914'
-    return api.friends_ids(user)
+    try:
+        return api.friends_ids(user)
+    except:
+        print("This Twitter Handle doesn't exist or is otherwise currently inaccessible. Exiting...")
+        exit()
 
 # Play again? prompt
 def reset_prompt():
